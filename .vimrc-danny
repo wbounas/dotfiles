@@ -1,0 +1,252 @@
+set nocompatible
+filetype off
+set fileformat=unix
+
+"" location of swp files
+set dir=~/tmp
+
+""
+"" Vundle setup
+""
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'junegunn/fzf'
+Bundle 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Bundle 'moll/vim-node'
+Bundle 'leafgarland/typescript-vim'
+Plugin 'dkprice/vim-easygrep'
+
+Bundle 'Tabular'
+Bundle 'tpope/vim-sensible'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-rails'
+Bundle 'scrooloose/nerdtree'
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'jgdavey/vim-railscasts'
+" vim-scripts repos
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'git://git.wincent.com/command-t.git'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+" END Vundle setup
+
+""
+"" Customisations
+""
+
+" my leader key is this
+let mapleader=","
+
+if filereadable(expand("~/.vimrc.before"))
+  source ~/.vimrc.before
+endif
+
+" for getting the right environment when starting bash from within vim
+set shell=/bin/bash\ --login
+
+" Set to auto read when a file is changed from the outside...may only work
+" with GUI vim
+set autoread
+
+set modifiable
+
+""
+"" Maps
+""
+
+" map command takes two args: the first is your new keystroke, the 2nd is the
+" command to execute
+"
+" from vim-hashrocket vim plugin
+" copy to end of line
+map Y y$
+" copy to system clipboard
+map gy "*y
+" copy whole file to system clipboard
+nmap gY gg"*yG
+
+"'v' in front of a map command indicates it's for visual mode.
+"
+" Enable TAB indent and SHIFT-TAB unindent
+vnoremap <silent> <TAB> >gv
+vnoremap <silent> <S-TAB> <gv
+
+" The ':map' command creates a key map that works in normal, visual, select and operator pending modes. The ':map!' command creates a key map that works in insert and command-line mode.
+
+" resize? not currently working...
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+" not sure what this does...rouge copy and paste from someone else's config
+vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+" not sure what this does
+" inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+" enter an interactive shell. resume previous session by exiting the shell.
+" Similar to <C-z> to leave and fg to re-enter
+cmap sh<CR> !bash --login<CR>
+noremap <C-d> :sh<cr>
+
+cmap opendir<CR> !open `pwd`
+noremap <C-d> :opendir<cr>
+
+cmap open<CR> !open expand('%:t')
+noremap <C-d> :open<cr>
+
+" remap means recursive map, i.e. (default) will follow all existing map
+" commands to arrive at the correct commend
+" noremap means no recursive map, meaning this command will NOT follow any map
+" tree, if it exists, and instead will execute the command that is written.
+" the 'v' mode denotes visual and select
+" the 'x' mode denots visual only
+xnoremap <leader>g y :Ggrep "<CR>
+
+" what do these do?
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+" => Spell checking
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Toggles paste mode
+map <leader>pp :set paste!<CR>i
+
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
+
+
+" Fast saving...really? it's already pretty fast. likely will remove these.
+nmap <leader>w :w<cr>
+nmap <leader><S-w>w :w!<cr>
+nmap <leader>wq :wq<cr>
+nmap <leader><S-w>q :wq!<cr>
+
+""
+"" formatting
+""
+set tabstop=2
+set shiftwidth=2
+set softtabstop=0
+set expandtab
+set smarttab
+
+""
+"" themes
+""
+set background=dark
+" " For solarized plugin color scheme
+" "let g:solarized_visibility = "high"
+" "let g:solarized_contrast = "high"
+" "let g:solarized_termcolors=256
+" let g:solarized_termtrans = 1
+" colorscheme solarized
+
+""
+"" abbreviations
+""
+
+" iabbrev takes 2 args: the keystroke and the expanded text. In insert mode, type the 1st argument, then space, and it'll expand to the 2nd argument. magic sauce!
+
+iabbrev Lidsa     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+iabbrev rdebug    require 'ruby-debug'; Debugger.start; Debugger.settings[:autoeval] = 1; Debugger.settings[:autolist] = 1; debugger
+iabbrev bpry      require 'pry'; binding.pry;
+iabbrev ipry      require IEx; IEx.pry;
+iabbrev qna <details><summary>Question</summary>answer</details>
+iabbrev ipry      require IEx; IEx.pry;
+" leader e to expand to current path. On further investigation...%% in command
+" mode will expand path
+cabbr %% <C-R>=expand('%:p:h')<CR>
+
+""
+"" Plugin config
+""
+
+" NERDTree (visual folder structure)
+nmap <leader>n :NERDTreeToggle<CR>
+let NERDTreeHighlightCursorline=1
+let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg']
+
+let g:mustache_abbreviations=1
+
+set wildignore+=node_modules,*.zip,*.log
+
+" jsx highlighting
+" syntax hilite in js files, not just jsx
+:syntax enable
+syntax on
+let g:jsx_ext_required = 0
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+" Open files in horizontal split
+nnoremap <silent> <Leader>s :call fzf#run({
+\   'down': '40%',
+\   'sink': 'botright split' })<CR>
+
+" Open files in vertical horizontal split
+nnoremap <silent> <Leader>v :call fzf#run({
+\   'right': winwidth('.') / 2,
+\   'sink':  'vertical botright split' })<CR>
+
+function! s:ag_to_qf(line)
+  let parts = split(a:line, ':')
+  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
+        \ 'text': join(parts[3:], ':')}
+endfunction
+
+function! s:ag_handler(lines)
+  if len(a:lines) < 2 | return | endif
+
+  let cmd = get({'ctrl-x': 'split',
+               \ 'ctrl-v': 'vertical split',
+               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
+
+  let first = list[0]
+  execute cmd escape(first.filename, ' %#\')
+  execute first.lnum
+  execute 'normal!' first.col.'|zz'
+
+  if len(list) > 1
+    call setqflist(list)
+    copen
+    wincmd p
+  endif
+endfunction
+
+command! -nargs=* Ag call fzf#run({
+\ 'source':  printf('ag --nogroup --column --color "%s"',
+\                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
+\ 'sink*':    function('<sid>ag_handler'),
+\ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : --nth 4.. '.
+\            '--multi --bind=ctrl-a:select-all,ctrl-d:deselect-all '.
+\            '--color hl:68,hl+:110',
+\ 'down':    '50%'
+\ })

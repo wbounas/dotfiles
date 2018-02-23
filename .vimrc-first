@@ -1,0 +1,27 @@
+"show line numbers
+:set number
+"show syntax highlighting
+:syntax on
+
+"start searching when I begin typing
+set incsearch
+"highlight all matches of search subject
+set hlsearch
+"search without Case Sensitivity
+set ignorecase "to disable temporarily, search with \C (force sensitivity)
+"consider case if an Uppercase letter is used in query
+set smartcase
+
+"Adjust tabs so that they are two space characters
+"but don't mess with the Linux default tab, 8 tabstop
+set softtabstop=2
+"do the same for moving text and deleting spaces
+set shiftwidth=2
+
+"show current row/column at bottom corner of screen
+set ruler
+"underline current line where cursor type is
+"set cursorline
+
+"Spell check set to F6
+map <F6> :setlocal spell! spelllang=en_us<CR>
