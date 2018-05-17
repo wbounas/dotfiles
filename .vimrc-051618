@@ -42,3 +42,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 "Spell check set to F6
 map <F6> :setlocal spell! spelllang=en_us<CR>
+
+"Not sure if this does anything..
+set background=dark
