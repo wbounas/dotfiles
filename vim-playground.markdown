@@ -1,0 +1,151 @@
+=======================================================================
+|  W e l c o m e   t o   W i l l ' s   V I M   E x p e r i m e n t !  |
+=======================================================================
+
+
+hello!
+
+this is a playground text file for learning Vim.
+
+It seems super powerful, and I want to learn how to use it!
+
+**Pathogen Plugins:**
+- delimitMate
+- Livedown
+- surround.vim
+- repeat.vim
+
+NOTES:
+- To display line numbers, type `:set number` <enter> 
+-- You can also set this in ~/.vimrc configuration file for always-on status
+=========================================================================================================
+CHEAT-SHEET:
+-Starting Vim: vim FILENAME <enter>
+
+-Modes:
+Normal mode: <esc> (also will cancel an unwanted and partially completed command)
+
+-Quitting Vim:
+<esc> :q! <enter> to trash all changes
+<esc> :wq <enter> to save all changes
+
+-Movement: h (left) j (down) k (up) l (right)
+
+**---CURSOR LOCATION and FILE STATUS---**
+In Normal Mode:
+CTRL+g  -  shows message @ bottom of page with filename and current position in the file
+G  -  move you to the bottom of the file
+gg  -  move you to the start of the file
+[line number] G  -  move you to the beginning of the line specified (# THEN G)
+Go  -  moves you to the last line, and puts you in `insert` mode on the following line
+
+**---The SEARCH Command---**
+In Normal Mode:
+/ [phrase to search for]  -  allows you to search for the phrase
+? [phrase]  -  search for a phrase in the backward direction
+n  -  search for the same phrase again
+N  -  search for the same phrase in the opposite direction
+CTRL+o  -  go back to where you came from (repeatable)
+CTRL+i  -  goes forward (repeatable)
+%  -  find matching (), [], or {} (NOTE: cursor must be placed on these characters)
+
+--Oddities--
+-After searching, typing `n` will search for the same phrase again
+--Alternatively, type `N` to search in the opposite direction
+
+**---OPERATORS and MOTIONS---**
+Many commands that change text are made from an OPERATOR and a MOTION.
+  --The format for a delete command with the  ' d ' delete operator is as follows:
+  d  [count]  motion
+  --In this example:
+  d  -  is the delete operator
+  count  -  how many things to operate on (optional)
+  motion  -  is what the operator will operate on
+
+  --EXAMPLE--
+  de
+  --In this example:
+  d  -  is the delete operator
+  e  -  is the motion, telling Vim to delete from the cursor to the end of the word
+
+  --EXAMPLE--
+  2dd
+  --In this example:
+  2  -  is the count
+  dd  -- is operator AND motion (telling to delete an entire line)
+
+-Short List of Motions-
+w  -  until the start of the next word, EXCLUDING that word's first character
+2w  -  move the cursor 2 words forward
+e  -  to the end of the current word, INCLUDING the word's last character
+3e  -  move the cursor to the end of the third word forward (ahead of current word)
+$  -  to the end of the line, INCLUDING the line's last character
+0  -  to the start of the line, INCLUDING the line's first character
+NOTE: pressing just the MOTION while in Normal mode (without an OPERATOR) will move the cursor as specified!
+
+EXAMPLE:
+this is example text to practice motions and operators!
+hello World. hello Boston. hello America.
+
+**---DELETION COMMANDS---**
+In Normal Mode:
+-Delete a Character (at the cursor type): x
+-Delete a Word (at the beginning of a word): dw
+-Delete a Word (inside of a word): diw
+-Delete a Word + its Surrounding White Space: daw
+-Delete to the End of the Line (from cursor type to end of line): d$
+-Delete to the End of the Line (alias): D
+-Delete an Entire Line: dd
+
+EXAMPLE:
+hey this is a sentence. adsflkjasldkfjlkasdflkjasdf. and another!
+this is another sentence, but on a new line. these are for practice with deletion commands.
+try deleting this entire line using `d0` on character `$`. it should delete all but the last character. $
+
+**---UNDO and REDO---**
+In Normal Mode:
+u  -  undo the last commands
+U  -  fix an entire line
+CTRL+r  -  redo the commands ran after the changes you undo'd back to (undo the undo's)
+
+**---Inserting or Appending Text---**
+i  "type inserted text" <esc>  --> insert before the cursor, and return to Normal mode
+A  "type appended text" <esc>  --> append after the line, and return to Normal mode
+
+**---The PUT Command---**
+In Normal Mode:
+p  -  put something stored in a Vim register BELOW the cursor's current line
+
+**---The REPLACE Command---**
+In Normal Mode:
+rx  -  replace cursor type with character following `r` in the command (in this example, `x`)
+
+**---The CHANGE Operator---**
+--Used with the same motions as delete--
+c  [number]  motion
+
+  --EXAMPLE--
+  c$
+  --In this example:
+  c  -  is the OPERATOR
+  $  -  is the MOTION, telling Vim to change to the end of the line, INCLUDING the last character
+
+--Commands--
+In Normal Mode:
+ce  -  deletes from cursor type to the end of the current word, and places you in Insert mode
+c$  -  deletes from cursor type to end of line, places you in Insert mode
+C  -  alias for c$
+cw  -  deletes word from cursor type INCLUDING first character, and places you in Insert mode
+--NOTE: if in the middle of a word, use either `ciw` for the entire word, or `caw` for the word + surrounding whitespace
+
+**---The SUBSTITUTE Command---**
+In Normal Mode:
+:s/old/new/g  -  substitute `new` for `old` GLOBALLY in the line
+:s/this/that  -  substitute `that` for `this` only for the first occurrence of `that` in the line
+:#,#s/old/new/g  -  change every occurrence of a character string between two lines
+  --where #,# are the line numbers of the range of lines where the substitution is to be done
+:%s/old/new/g  -  to change every occurrence in the whole file
+:%s/old/new/gc  -  to find every occurrence in the whole file, with a prompt whether to substitute or not
+=========================================================================================================
+this sentence is a mispelt disaster, but I fixed it using just the keyboard!
+fhss siwntenc is k mcslafl disaster, btt I fixwd wt uszng jste the kyybword!
