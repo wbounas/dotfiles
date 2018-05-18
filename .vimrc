@@ -4,6 +4,9 @@ filetype plugin indent on
 "show syntax highlighting
 syntax on
 
+" Eliminate trailing whitespace (restrict to only markdownfiles)
+" see: http://vim.wikia.com/wiki/Remove_unwanted_spaces
+autocmd BufWritePre *.md %s/\s\+$//e
 
 "show line numbers
 set number
