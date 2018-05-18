@@ -62,7 +62,14 @@ set background=dark
 "        \ let w:m1=matchadd('CollumnLimit', pattern, -1)
 "augroup END
 
-"Upgraded Version
-"highlights 1st char over 79
+" Upgraded Version of Above
+" Highlights 1st char over 79
 highlight ColorColumn cterm=reverse ctermbg=black
 call matchadd('ColorColumn', '\%80v', 1)
+
+" Enable Spell Check 
+autocmd FileType markdown setlocal spell "this enables spellcheck for markdown files
+autocmd FileType gitcommit setlocal spell textwidth=72 "not sure what this currently does..
+
+set mouse=a                       " Enable mouse
+set mousehide                     " Hide mouse when typing
