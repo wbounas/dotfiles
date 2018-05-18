@@ -1,56 +1,82 @@
+"------------------------------------"
+"============WSB's VIMRC============="
+"=======Current as of ~May 2018======"
+"------------------------------------"
+
+"=======PATHOGEN PLUGIN MANAGER======="
 execute pathogen#infect()
 
-filetype plugin indent on
-"show syntax highlighting
-syntax on
+filetype plugin indent on     "required I believe..?
 
-" Eliminate trailing whitespace (restrict to only markdownfiles)
+
+"=======WHITESPACE ELIMINATION======="
+" Eliminate trailing whitespace (restrict to only markdown files)
 " see: http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre *.md %s/\s\+$//e
 
-"show line numbers
-set number
-"change line number margin width
-"set numberwidth=5
-"Backspace deletes like most programs in insert mode
-set backspace=2
 
-"start searching when I begin typing
-set incsearch
-"highlight all matches of search subject
-set hlsearch
-"search without Case Sensitivity
+"=======SEARCHING======="
+set incsearch "start searching when I begin typing
+set hlsearch "highlight all matches of search subject
+set smartcase "consider case if an Uppercase letter is used in query
+
+" Search without Case Sensitivity
 set ignorecase "to disable temporarily, search with \C (force sensitivity)
-"consider case if an Uppercase letter is used in query
-set smartcase
 
+
+"=======FORMATTING======="
 "Adjust tabs so that they are two space characters
 "but don't mess with the Linux default tab, 8 tabstop
 set softtabstop=2
-"do the same for moving text and deleting spaces
-set shiftwidth=2
+set shiftwidth=2       "do the same for moving text and deleting spaces
+set ruler              "show current Row / Column at bottom corner of screen
+set number             "show line numbers
+set backspace=2        "Backspace deletes like most programs in insert mode
+"set numberwidth=5     "change line number margin width
+syntax on              "show syntax highlighting
+filetype plugin indent on     "I hope this still works
+set background=dark    "Don't think this is doing anything at the moment...
 
-"show current row/column at bottom corner of screen
-set ruler
+" Highlights 1st char over 79
+highlight ColorColumn cterm=reverse ctermbg=black
+call matchadd('ColorColumn', '\%80v', 1)
 
-"Set Red Marker for 80 Characters
-"set textwidth=80
-"set colorcolumn=+1
 
+
+"=======HARDCORE========"
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
+
+"=======SPELLCHECK=======" 
 "Spell check set to F6
 map <F6> :setlocal spell! spelllang=en_us<CR>
+autocmd FileType markdown setlocal spell "this enables spellcheck for markdown files
 
-"Don't think this is doing anything at the moment...
-set background=dark
+"not sure what this currently does..
+autocmd FileType gitcommit setlocal spell textwidth=72 
 
-"=======Out-Dated======="
-"===See Below for Cleaner Code==="
+
+
+"=======MOUSE and SCROLLING======="
+set mouse=a                       " Enable mouse
+set mousehide                     " Hide mouse when typing
+
+
+"----------------------------------------"
+"=======OLD OUTDATED VIMRC SECTION======="
+"----------------------------------------"
+
+"=======OUTDATED======="
+"Set Red Marker for 80 Characters
+"set textwidth=80
+"set colorcolumn=+1
+
+"=========OUTDATED========"
+"===Highlight 79th Char==="
 "augroup collumnLimit
 "  autocmd!
 "  autocmd BufEnter,WinEnter,Filetype javascript,markdown
@@ -62,14 +88,19 @@ set background=dark
 "        \ let w:m1=matchadd('CollumnLimit', pattern, -1)
 "augroup END
 
-" Upgraded Version of Above
-" Highlights 1st char over 79
-highlight ColorColumn cterm=reverse ctermbg=black
-call matchadd('ColorColumn', '\%80v', 1)
+"-----------------------------------------------"
+"=======END OF OLD OUTDATED VIMRC SECTION======="
+"-----------------------------------------------"
 
-" Enable Spell Check 
-autocmd FileType markdown setlocal spell "this enables spellcheck for markdown files
-autocmd FileType gitcommit setlocal spell textwidth=72 "not sure what this currently does..
 
-set mouse=a                       " Enable mouse
-set mousehide                     " Hide mouse when typing
+"===================================="
+"------------------------------------"
+ "		  /\		    "
+ "		 /  \		    "
+ "		/____\	    	    "
+ "	       /\    /\	            "
+ "	      /  \  /  \	    "
+ "	     /____\/____\	    "
+"------------------------------------"
+"===================================="
+
