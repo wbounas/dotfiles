@@ -1,0 +1,168 @@
+" ===Initialize Pathogen===
+execute pathogen#infect()
+" Enables syntax highlighting for js docs
+let g:javascript_plugin_jsdoc = 1
+" Concealing Characters
+" You can customize concealing characters, if your font provides the character you want, by defining one or more of the following variables:
+
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+" let g:javascript_conceal_noarg_arrow_function = "🞅"
+" let g:javascript_conceal_underscore_arrow_function = "🞅"
+" linter Jshint (update to standard)
+" let g:syntastic_check_on_open=1
+
+" ===All Plugin Madness===
+" This is user vimrc file version
+" The below line starts in insert mode Great for learning, bad for vimming
+" :startinsert
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" Eliminate trailing whitespace (restrict to only markdownfiles)
+" see: http://vim.wikia.com/wiki/Remove_unwanted_spaces
+autocmd BufWritePre *.md %s/\s\+$//e
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+" Safe Pasting :)
+":set pastetoggle=<f5>
+:set paste
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+""" Custom Hidden Characters
+
+" show hidden characters in Vim
+" :set list
+"
+" " settings for hidden chars
+" " what particular chars they are displayed with
+" :set lcs=tab:▒░,trail:▓
+" " or
+" :set listchars=tab:▒░,trail:▓
+" :set listchars=tab:▒░,trail:▓
+" " used \u2592\u2591 for tab and \u2593 for trailing spaces in line.
+" " In Vim help they suggest using ">-" for tab and "-" for trail.
+"
+" " hide hidden chars
+" :set nolist
+"
+" tabs are at proper location
+" :set tabstop 8
+" don't use actual tab character (ctrl"v)
+:set expandtab
+" indenting is 4 spaces
+:set shiftwidth=4
+" turns it on - can toggle this instead
+" :set autoindent
+" does the right thing (mostly) in programs
+:set smartindent
+"
+" ====== ALL VUNDLE PLUGINS ======
+" All of your Plugins must be added before the following line
+Plugin 'mustache/vim-mustache-handlebars'
+" Great indentation plugins
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+" Epic syntax highlighting
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'scrooloose/syntastic'
+" need to install tern_for_vim for below to execute.
+" Plugin 'Valloric/YouCompleteMe'
+" This does what it says on the tin. It will check your file on open too, not
+" just on save.
+" " You might not want this, so just leave it out if you don't.
+" let g:syntastic_check_on_open=1
+Plugin 'elmcast/elm-vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" ===Rest of VIMRC===
+
+
+" Always use vim mode, even when starting with vi
+set nocompatible
+
+" set line number on (set nonu (number) to unset)
+filetype indent plugin on
+set number
+" Following three lines are a SO test
+set wrap
+set textwidth=80
+set formatoptions=n
+
+""
+set encoding=utf-8
+syntax enable
+set background=dark
+colorscheme solarized
+
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+"if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+"endif
+
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell textwidth=72
+
+set mouse=a                       " Enable mouse
+set mousehide                     " Hide mouse when typing
+
+
+" ALT OPTIONS BELOW
+set backspace=indent,eol,start    " Allow backspacing over everything in insert mode
+" set nobackup
+" set nowritebackup
+" set noswapfile                    " Stop using .swp files
+" set autoindent                    " Always set autoindenting on
+" set history=100                  " Keep x lines in history
+" set ruler                         " Always show cursor
+" set showcmd                       " Display incomplete commands
+" set showmode
+" set mouse=a                       " Enable mouse
+" set mousehide                     " Hide mouse when typing
+" set timeoutlen=500                " Don't lag the leader key + command
+" set showmatch
+" set nofoldenable                  " Don't fold by default
+" set foldlevel=99
+
+
+
+" original vimrc
+" syntax on autocmd filetype plugin indent on setlocal spell textwidth=72
+" Below is outdated?
+"set t_Co=256
+"syntax on
+"set background=dark
+"colorscheme distinguished
+
+"highlights char lines over 80
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
