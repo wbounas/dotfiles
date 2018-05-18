@@ -54,7 +54,6 @@ nnoremap <Down> :echoe "Use j"<CR>
 "=======SPELLCHECK=======" 
 "Spell check set to F6
 map <F6> :setlocal spell! spelllang=en_us<CR>
-autocmd FileType markdown setlocal spell "this enables spellcheck for markdown files
 
 "not sure what this currently does..
 autocmd FileType gitcommit setlocal spell textwidth=72 
@@ -87,6 +86,10 @@ set mousehide                     " Hide mouse when typing
 "  autocmd BufEnter,WinEnter,Filetype javascript,markdown
 "        \ let w:m1=matchadd('CollumnLimit', pattern, -1)
 "augroup END
+
+"=======OUTDATED======="
+"autocmd FileType markdown setlocal spell       "enable spellcheck automatically for markdown files
+
 
 "-----------------------------------------------"
 "=======END OF OLD OUTDATED VIMRC SECTION======="
