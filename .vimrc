@@ -9,6 +9,14 @@ execute pathogen#infect()
 filetype plugin indent on     "required I believe..?
 
 
+" Pathogen Plugins
+" ----------------
+" delimitMate
+" Livedown
+" surround.vim
+" repeat.vim
+
+
 "=======WHITESPACE ELIMINATION======="
 " Eliminate trailing whitespace (restrict to only markdown files)
 " see: http://vim.wikia.com/wiki/Remove_unwanted_spaces
