@@ -15,6 +15,7 @@ filetype plugin indent on     "required I believe..?
 " Livedown
 " surround.vim
 " repeat.vim
+" vim-markdown (gabrielelana)
 
 
 "=======WHITESPACE ELIMINATION======="
