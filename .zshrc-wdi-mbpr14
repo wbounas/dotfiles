@@ -1,0 +1,27 @@
+# Enable command substitution in prompts
+setopt PROMPT_SUBST
+
+# Function to get the current Git branch
+parse_git_branch() {
+  git branch --show-current 2>/dev/null
+}
+
+# Customize the prompt
+PROMPT='%F{blue}%~%f $(parse_git_branch)
+$ '
+
+# Add local binaries to PATH
+export PATH="$PATH:$HOME/.local/bin"
+
+# Set Atom as the default editor
+export EDITOR='atom --wait'
+export VISUAL='atom --wait'
+
+# Node Version Manager (NVM) setup
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
+
+# Ruby Version Manager (rbenv) setup
+if which rbenv > /dev/null; then
+   eval "$(rbenv init -)"
+fi
