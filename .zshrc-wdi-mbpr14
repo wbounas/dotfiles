@@ -13,9 +13,9 @@ $ '
 # Add local binaries to PATH
 export PATH="$PATH:$HOME/.local/bin"
 
-# Set Atom as the default editor
-export EDITOR='atom --wait'
-export VISUAL='atom --wait'
+# Set Visual Code as the default editor
+export EDITOR='code --wait'
+export VISUAL='code --wait'
 
 # Node Version Manager (NVM) setup
 export NVM_DIR="$HOME/.nvm"
